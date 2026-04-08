@@ -1,0 +1,21 @@
+services:
+  nginx:
+    image: ghcr.io/gbc-ekos/101480050-lab-test2-comp3133:latest
+    networks:
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik
+      # HTTPS router
+      - traefik.http.routers.labtest02.rule=Host(`${DOMAIN}`)
+      - traefik.http.routers.labtest02.entrypoints=websecure
+      - traefik.http.routers.labtest02.tls.certresolver=le
+      # HTTP → HTTPS redirect
+      - traefik.http.routers.labtest02-http.rule=Host(`${DOMAIN}`)
+      - traefik.http.routers.labtest02-http.entrypoints=web
+      - traefik.http.routers.labtest02-http.middlewares=to-https
+    restart: unless-stopped
+
+networks:
+  traefik:
+    external: true
