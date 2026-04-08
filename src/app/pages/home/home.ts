@@ -13,6 +13,8 @@ export class Home implements OnInit {
   store = inject(CharacterApi);
 
   ngOnInit() {
-    this.store.load();
+    if (this.store.characters().length === 0) {
+      this.store.load();
+    }
   }
 }

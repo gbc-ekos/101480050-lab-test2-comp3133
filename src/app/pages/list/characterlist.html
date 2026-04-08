@@ -6,7 +6,7 @@
   <mat-grid-list cols="4" rowHeight="600px" gutterSize="16px">
     @for (char of store.characters(); track char.id) {
       <mat-grid-tile>
-        <mat-card class="char-card">
+        <mat-card class="char-card" [routerLink]="['/', char.id]" style="cursor:pointer">
 
           <mat-card-header>
             <mat-card-title>{{ char.name }}</mat-card-title>

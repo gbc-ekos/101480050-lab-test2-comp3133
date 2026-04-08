@@ -1,0 +1,56 @@
+@if (store.loading()) {
+  <div class="status-wrap">
+    <mat-spinner diameter="48" />
+  </div>
+} @else if (store.error()) {
+  <div class="status-wrap">
+    <p class="error">{{ store.error() }}</p>
+  </div>
+} @else {
+  @let char = store.character()!;
+  <div class="detail-card">
+    <div class="img-col">
+      <img [src]="char.image || 'no-image.svg'" [alt]="char.name" />
+    </div>
+    <div class="info-col">
+      <h1>{{ char.name }}</h1>
+      @if (char.alternate_names.length > 0) {
+        <p class="alt-names">{{ char.alternate_names.join(', ') }}</p>
+      }
+      <dl>
+        @if (char.house) {
+          <div><dt>House</dt><dd>{{ char.house }}</dd></div>
+        }
+        <div><dt>Actor</dt><dd>{{ char.actor || 'Unknown' }}</dd></div>
+        <div><dt>Species</dt><dd>{{ char.species }}</dd></div>
+        <div><dt>Gender</dt><dd>{{ char.gender }}</dd></div>
+        <div><dt>Wizard</dt><dd>{{ char.wizard ? 'Yes' : 'No' }}</dd></div>
+        @if (char.ancestry) {
+          <div><dt>Ancestry</dt><dd>{{ char.ancestry }}</dd></div>
+        }
+        @if (char.eyeColour) {
+          <div><dt>Eye Colour</dt><dd>{{ char.eyeColour }}</dd></div>
+        }
+        @if (char.hairColour) {
+          <div><dt>Hair Colour</dt><dd>{{ char.hairColour }}</dd></div>
+        }
+        @if (char.patronus) {
+          <div><dt>Patronus</dt><dd>{{ char.patronus }}</dd></div>
+        }
+        @if (char.wand?.wood) {
+          <div><dt>Wand Wood</dt><dd>{{ char.wand.wood }}</dd></div>
+        }
+        @if (char.wand?.core) {
+          <div><dt>Wand Core</dt><dd>{{ char.wand.core }}</dd></div>
+        }
+        @if (char.wand?.length) {
+          <div><dt>Wand Length</dt><dd>{{ char.wand.length }}"</dd></div>
+        }
+        @if (char.dateOfBirth) {
+          <div><dt>Date of Birth</dt><dd>{{ char.dateOfBirth }}</dd></div>
+        }
+        <div><dt>Status</dt><dd>{{ char.alive ? 'Alive' : 'Deceased' }}</dd></div>
+      </dl>
+    </div>
+  </div>
+}
