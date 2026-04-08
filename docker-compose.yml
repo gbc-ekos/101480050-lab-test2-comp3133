@@ -10,10 +10,7 @@ services:
       - traefik.http.routers.labtest02.rule=Host(`${DOMAIN}`)
       - traefik.http.routers.labtest02.entrypoints=websecure
       - traefik.http.routers.labtest02.tls.certresolver=le
-      # HTTP → HTTPS redirect
-      - traefik.http.routers.labtest02-http.rule=Host(`${DOMAIN}`)
-      - traefik.http.routers.labtest02-http.entrypoints=web
-      - traefik.http.routers.labtest02-http.middlewares=to-https
+      - traefik.http.services.labtest02.loadbalancer.server.port=80
     restart: unless-stopped
 
 networks:
