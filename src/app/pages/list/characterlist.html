@@ -1,0 +1,41 @@
+@if (loading()) {
+  <p class="status">Loading characters…</p>
+} @else if (error()) {
+  <p class="status error">{{ error() }}</p>
+} @else {
+  <mat-grid-list cols="4" rowHeight="600px" gutterSize="16px">
+    @for (char of characters(); track char.id) {
+      <mat-grid-tile>
+        <mat-card class="char-card">
+
+          <mat-card-header>
+            <mat-card-title>{{ char.name }}</mat-card-title>
+            @if (char.alternate_names.length > 0) {
+              <button mat-icon-button
+                      [matTooltip]="char.alternate_names.join(', ')"
+                      matTooltipPosition="right"
+                      aria-label="Alternate names">
+                <mat-icon>info</mat-icon>
+              </button>
+            }
+          </mat-card-header>
+
+          <div class="img-wrap">
+            <img [src]="char.image || 'no-image.svg'"
+                 [alt]="char.name"
+                 [ngClass]="{ 'img-dead': !char.alive }" />
+            @if (!char.alive) {
+              <span class="dead-label">DEAD</span>
+            }
+          </div>
+
+          <mat-card-content>
+            <p class="house">{{ char.house || '—' }}</p>
+            <p class="actor">Played by: {{ char.actor || 'Unknown' }}</p>
+          </mat-card-content>
+
+        </mat-card>
+      </mat-grid-tile>
+    }
+  </mat-grid-list>
+}
