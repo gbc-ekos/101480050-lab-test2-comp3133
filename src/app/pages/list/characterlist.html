@@ -1,10 +1,10 @@
-@if (loading()) {
+@if (store.loading()) {
   <p class="status">Loading characters…</p>
-} @else if (error()) {
-  <p class="status error">{{ error() }}</p>
+} @else if (store.error()) {
+  <p class="status error">{{ store.error() }}</p>
 } @else {
   <mat-grid-list cols="4" rowHeight="600px" gutterSize="16px">
-    @for (char of characters(); track char.id) {
+    @for (char of store.characters(); track char.id) {
       <mat-grid-tile>
         <mat-card class="char-card">
 

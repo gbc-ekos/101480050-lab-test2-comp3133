@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Characterlist } from '../list/characterlist';
+import { Characterfilter } from '../list/characterfilter/characterfilter';
+import { CharacterApi } from '../list/services/character-api';
 
 @Component({
   selector: 'app-home',
-  imports: [Characterlist],
+  imports: [Characterlist, Characterfilter],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
-export class Home {}
+export class Home implements OnInit {
+  store = inject(CharacterApi);
+
+  ngOnInit() {
+    this.store.load();
+  }
+}

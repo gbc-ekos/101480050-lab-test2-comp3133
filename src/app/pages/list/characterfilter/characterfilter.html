@@ -1,0 +1,18 @@
+<div class="filter-bar">
+  <mat-form-field appearance="outline" style="flex-grow: 1;">
+    <mat-label>Search by name</mat-label>
+    <input matInput [formControl]="search" placeholder="e.g. Harry" />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>House</mat-label>
+    <mat-select [formControl]="houseControl" (selectionChange)="onHouseChange($event.value)">
+      <mat-option value="">All houses</mat-option>
+      <mat-option value="__no_house__">No house</mat-option>
+      @for (opt of options; track opt) {
+        <mat-option [value]="opt">{{ opt }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
